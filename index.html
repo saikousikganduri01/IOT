@@ -3216,6 +3216,10 @@
       <span class="slot-bill" id="bill3"></span>
     </div>
   </div>
+  <h2>Environment</h2>
+
+    <p>Temperature: <span id="temp">--</span> °C</p>
+    <p>Humidity: <span id="hum">--</span> %</p>
 
   <!-- Gate -->
   <div>
@@ -3364,6 +3368,18 @@
       const data = snapshot.val();
       if (!data) return;
       latestParkingData = data;
+
+      let tempEl = document.getElementById("temp");
+      let humEl = document.getElementById("hum");
+
+      // 🌡️ Temperature
+      tempEl.innerText = data.temperature ?? "--";
+      tempEl.style.color = data.temperature > 35 ? "red" : "green";
+
+      // 💧 Humidity
+      humEl.innerText = data.humidity ?? "--";
+      humEl.style.color = data.humidity > 80 ? "blue" : "green";
+
       const slotValues = [data.slot1, data.slot2, data.slot3];
 
       updateSlot("s1", "status1", data.slot1);
